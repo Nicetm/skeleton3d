@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Skeleton Visualization</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        #canvas { width: 512px; height: 512px; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/static/js/three.module.js",
+          "three-trackballcontrols": "/static/js/TrackballControls.js",
+          "three-dragcontrols": "/static/js/DragControls.js",
+          "three-meshline": "/static/js/THREE.MeshLine.Module.min.js",
+          "posex": "/static/js/posex.js"
+        }
+      }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <canvas id="canvas" width="512" height="512"></canvas>
+        <div id="notation" style="position:absolute; display:none;"></div>
+        <div id="indicator1" style="position:absolute; border:1px solid #FF0000; display:none;"></div>
+        <div id="indicator2" style="position:absolute; border:1px solid #00FF00; display:none;"></div>
+    </div>
+    <button id="reset_camera">Reset Camera</button>
+    <button id="reset_pose">Reset Pose</button>
+    <button id="all_reset">All Reset</button>
+    <button id="add_body">Add Body</button>
+    <button id="remove_body">Remove Body</button>
+    <button id="save">Save Image</button>
+    <button id="copy">Copy to Clipboard</button>
+    <div>- Camera</div>
+        <label><input type="checkbox" id="fixed_roll">Fixed Roll</label>
+    <script type="module">
+        import { init, init_3d } from 'posex';
+
+        const ui = {
+            container: document.getElementById('container'),
+            canvas: document.getElementById('canvas'),
+            notation: document.getElementById('notation'),
+            indicator1: document.getElementById('indicator1'),
+            indicator2: document.getElementById('indicator2'),
+            all_reset: document.getElementById('all_reset'),
+            reset_camera: document.getElementById('reset_camera'),
+            reset_pose: document.getElementById('reset_pose'),
+            fixed_roll: document.getElementById('fixed_roll'),
+            add_body: document.getElementById('add_body'),
+            remove_body: document.getElementById('remove_body'),
+            canvas_width: document.querySelector('#canvas_width'),
+            canvas_height: document.querySelector('#canvas_height'),
+            bg: document.querySelector('#bg_file'),
+            reset_bg: document.querySelector('#reset_bg'),
+            save: document.getElementById('save'),
+            copy: document.getElementById('copy'),
+            //save_pose: document.querySelector('#save_pose'),
+            //save_pose_callback: save_pose,
+            //notify: notify,
+        };
+
+        init(ui);
+        const animate = init_3d(ui);
+        animate();
+    </script>
+</body>
+</html>
